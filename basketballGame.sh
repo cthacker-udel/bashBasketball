@@ -5,7 +5,7 @@ echo -e "\n Welcome to Bash Basketball! \n"
 
 echo -e "\n\nRules are : You are Player Team and Computer is Computer Team, you can make three pointers and two pointers, dunks and layups, however, the computer is able to block or steal the ball from you and you are able to do the same as well\n\n"
 
-possesion=0
+posession=0
 yourScore=0
 computerScore=0
 typeOfShot=0
@@ -20,19 +20,19 @@ yourRandomVal=$(shuf -i 1-2 -n 1)
 computerRandomVal=$(shuf -i 1-2 -n 1)
 if [ $yourRandomVal -eq 1 ]; then
     echo -e "\nYou won the tip off!\n"
-    possesion=1
+    posession=1
 else
     echo -e "\nThe computer won the tip off!\n"
-    possesion=2
+    posession=2
 fi
 
 while [ "$loopVar" -gt 0 ]; do
-    if [ $possesion -eq 1 ]; then
+    if [ $posession -eq 1 ]; then
         # you have possesion
         read -p "What type of shot will it be? 1) Layup 2) Dunk 3) Two-Point Jumpshot 4) Three-Pointer Jumpshot" choice
         if [ $choice -lt 1 -o $choice -gt 4 ]; then
             echo -e "Not a valid choice, switching possesion"
-            possesion=2
+            posession=2
             continue
         else
             if [ $choice -eq 1 ]; then
@@ -65,7 +65,7 @@ while [ "$loopVar" -gt 0 ]; do
                 computerRandomVal=$(shuf -i 1-2 -n 1)
                 if [ $computeRandomVal -eq 1 ]; then
                     echo -e "\nYour dunk has been blocked, switching possesion\n"
-                    possesion=2
+                    posesion=2
                     loopVar=$((loopVar - 5)) 
                     continue
                 else
@@ -89,7 +89,7 @@ while [ "$loopVar" -gt 0 ]; do
                computerRandomVal=$(shuf -i 1-3 -n 1)
                if [ $computerRandomVal -eq 1 ]; then
                    echo -e "Your 2 points jumpshot has been blocked, switching possesion\n"
-                   possesion=2
+                   posession=2
                    loopVar=$((loopVar - 5)) 
                    continue
                else
@@ -135,6 +135,68 @@ while [ "$loopVar" -gt 0 ]; do
         fi
     else
         echo "Computer possesion!"
+        computerShotChoice=$(shuf -i 1-4 -n 1)
+        if [ $computerShotChoice -eq 1 ]; then
+            echo "Layup chosen"
+            yourRandomVal=$(shuf -i 1-2 -n 1)
+            if [ "$yourRandomVal" -eq 1 ]; then
+                echo "You blocked the computers shot!"
+                posession=1
+                loopVar=$((loopVar - 5))
+                continue
+            else
+                echo "Computer made layup, 2 points"
+                posession=1
+                computerScore=$((computerScore + 2))
+                loopVar=$((loopVar - 5))
+                continue
+            fi
+        elif [ $computerShotChoice -eq 2 ]; then
+            echo "Dunk chosen"
+            yourRandomVal=$(shuf -i 1-2 -n 1)
+            if [ $yourRandomVal -eq 1 ]; then
+                echo "You blocked the computer's dunk"
+                posession=1
+                loopVar=$((loopVar-5))
+                continue
+            else
+                echo "Computer dunks"
+                posession=1
+                computerScore=$((computerScore + 2))
+                loopVar=$((loopVar-5))
+                continue
+            fi
+        elif [ $computerShotChoice -eq 3 ]; then
+            echo "Two pointer chosen"
+            yourRandomVal=$(shuf -i 1-3 -n 1)
+            if [ $yourRandomVal -eq 1 ]; then
+                echo "You blocked the compute's two point jumpshot"
+                posession=1
+                loopVar=$((loopVar-5))
+                continue
+            else
+                echo "Computer made two point jumpshot"
+                posession=1
+                computerScore=$((computerScore + 2))
+                loopVar=$((loopVar-5))
+                continue
+            fi
+        elif [ $computerShotChoice -eq 4 ]; then
+            echo "Three pointer chosen"
+            yourRandomVal=$(shuf -i 1-4 -n 1)
+            if [ $yourRandomVal -eq 1 ]; then
+                echo "You blocked the computer's three point jump shot"
+                posession=1
+                loopVar=$((loopVar-5))
+                continue
+            else
+                echo "Computer made three point jumpshot"
+                posession=1
+                computerScore=$((computerScore + 3))
+                loopVar=$((loopVar-5))
+                continue
+            fi
+        fi
 
     fi
 done
