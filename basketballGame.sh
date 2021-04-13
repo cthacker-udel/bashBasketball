@@ -9,7 +9,7 @@ possesion=0
 yourScore=0
 computerScore=0
 typeOfShot=0
-loopVar=1
+loopVar=100
 yourRandomVal=0
 computerRandomVal=0
 
@@ -26,7 +26,7 @@ else
     possesion=2
 fi
 
-while [ "$loopVar" -eq 1 ]; do
+while [ "$loopVar" -gt 0 ]; do
     if [ $possesion -eq 1 ]; then
         # you have possesion
         read -p "What type of shot will it be? 1) Layup 2) Dunk 3) Two-Point Jumpshot 4) Three-Pointer Jumpshot" choice
@@ -42,6 +42,7 @@ while [ "$loopVar" -eq 1 ]; do
                     #blocked
                     echo -e "\nYour layup has been blocked, switching posession\n"
                     possesion=2
+                    loopVar=$((loopVar - 5))
                     continue
                 else
                     echo -e "\nYour layup was not blocked\n"
@@ -49,9 +50,13 @@ while [ "$loopVar" -eq 1 ]; do
                     if [ $yourRandomVal -eq 1 ]; then
                         echo -e "\nShot successful, 2 points made\n"
                         yourScore=$((yourScore + 2))
+                        loopVar=$((loopVar - 5)) 
+                        posession=2
                         continue
                     else
                         echo -e "Layup missed"
+                        loopVar=$((loopVar - 5)) 
+                        posession=2
                         continue
                     fi
                 fi
@@ -61,6 +66,7 @@ while [ "$loopVar" -eq 1 ]; do
                 if [ $computeRandomVal -eq 1 ]; then
                     echo -e "\nYour dunk has been blocked, switching possesion\n"
                     possesion=2
+                    loopVar=$((loopVar - 5)) 
                     continue
                 else
                     echo -e "\nYour dunk was not blocked\n"
@@ -68,9 +74,13 @@ while [ "$loopVar" -eq 1 ]; do
                     if [ $yourRandomVal -eq 1 ]; then
                         echo -e "\nDunk successful, 2 points made\n"
                         yourScore=$((yourScore + 2))
+                        loopVar=$((loopVar - 5)) 
+                        posession=2
                         continue
                     else
                         echo -e "Dunk missed"
+                        loopVar=$((loopVar - 5)) 
+                        posession=2
                         continue
                     fi
                fi
@@ -80,6 +90,7 @@ while [ "$loopVar" -eq 1 ]; do
                if [ $computerRandomVal -eq 1 ]; then
                    echo -e "Your 2 points jumpshot has been blocked, switching possesion\n"
                    possesion=2
+                   loopVar=$((loopVar - 5)) 
                    continue
                else
                    echo -e "\nYour 2 point jumpshot has not been blocked\n"
@@ -87,16 +98,44 @@ while [ "$loopVar" -eq 1 ]; do
                    if [ $yourRandomVal -eq 1 ]; then
                        echo -e "\nYour 2 pointer was successful, 2 points made\n"
                        yourScore=$((yourScore+2))
+                       loopVar=$((loopVar - 5)) 
+                       posession=2
                        continue
                    else
                        echo -e "\nYour 2 point jumpshot was unsuccessful\n"
+                       loopVar=$((loopVar - 5)) 
+                       posession=2
                        continue
                    fi
               fi
-           fi
+          elif [ $choice -eq 4 ]; then
+              #3 point shot
+              computerRandomVal=$(shuf -i 1-4 -n 1)
+              if [ $computerRandomVal -eq 1 ]; then
+                  echo "Your 3 point shot has been blocked"
+                  posession=2
+                  loopVar=$((loopVar - 5)) 
+                  continue
+              else
+                  echo -e "\nYour 3 point shot has not been blocked\n"
+                  yourRandomVal=$(shuf -i 1-2 -n 1)
+                  if [ $yourRandomVal -eq 1 ]; then
+                      echo -e "\n Your 3 pointer was successful, 3 points made\n"
+                      posession=2
+                      loopVar=$((loopVar - 5)) 
+                      continue
+                  else
+                      echo -e "\nYour 3 pointer was unsuccessful\n"
+                      loopVar=$((loopVar - 5)) 
+                      posession=2
+                      continue
+                  fi
+              fi
+          fi
         fi
     else
         echo "Computer possesion!"
+
     fi
 done
 
