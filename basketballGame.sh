@@ -38,7 +38,7 @@ while [ "$loopVar" -gt 0 ]; do
         else
             if [ $choice -eq 1 ]; then
                 # blocking change higher
-                computerRandomVal=$(shuf -i 1-2 -n 1)
+                computerRandomVal=$(shuf -i 1-4 -n 1)
                 if [ $computerRandomVal -eq 1 ]; then
                     #blocked
                     echo -e "\nYour layup has been blocked, switching posession\n"
@@ -67,7 +67,7 @@ while [ "$loopVar" -gt 0 ]; do
                 fi
             elif [ $choice -eq 2 ]; then
                 #blocking change higher
-                computerRandomVal=$(shuf -i 1-2 -n 1)
+                computerRandomVal=$(shuf -i 1-4 -n 1)
                 if [ $computeRandomVal -eq 1 ]; then
                     echo -e "\nYour dunk has been blocked, switching possesion\n"
                     sleep 1
@@ -95,7 +95,7 @@ while [ "$loopVar" -gt 0 ]; do
                fi
            elif [ $choice -eq 3 ]; then
                #block percentage lower
-               computerRandomVal=$(shuf -i 1-3 -n 1)
+               computerRandomVal=$(shuf -i 1-5 -n 1)
                if [ $computerRandomVal -eq 1 ]; then
                    echo -e "Your 2 points jumpshot has been blocked, switching possesion\n"
                    sleep 1
@@ -123,7 +123,7 @@ while [ "$loopVar" -gt 0 ]; do
               fi
           elif [ $choice -eq 4 ]; then
               #3 point shot
-              computerRandomVal=$(shuf -i 1-4 -n 1)
+              computerRandomVal=$(shuf -i 1-7 -n 1)
               if [ $computerRandomVal -eq 1 ]; then
                   echo "Your 3 point shot has been blocked"
                   sleep 1
@@ -157,7 +157,7 @@ while [ "$loopVar" -gt 0 ]; do
         if [ $computerShotChoice -eq 1 ]; then
             echo "Layup chosen"
             sleep 1
-            yourRandomVal=$(shuf -i 1-2 -n 1)
+            yourRandomVal=$(shuf -i 1-3 -n 1)
             if [ "$yourRandomVal" -eq 1 ]; then
                 echo "You blocked the computers shot!"
                 sleep 1
@@ -175,7 +175,7 @@ while [ "$loopVar" -gt 0 ]; do
         elif [ $computerShotChoice -eq 2 ]; then
             echo "Dunk chosen"
             sleep 1
-            yourRandomVal=$(shuf -i 1-2 -n 1)
+            yourRandomVal=$(shuf -i 1-3 -n 1)
             if [ $yourRandomVal -eq 1 ]; then
                 echo "You blocked the computer's dunk"
                 sleep 1
@@ -193,9 +193,9 @@ while [ "$loopVar" -gt 0 ]; do
         elif [ $computerShotChoice -eq 3 ]; then
             echo "Two pointer chosen"
             sleep 1
-            yourRandomVal=$(shuf -i 1-3 -n 1)
+            yourRandomVal=$(shuf -i 1-5 -n 1)
             if [ $yourRandomVal -eq 1 ]; then
-                echo "You blocked the compute's two point jumpshot"
+                echo "You blocked the computer's two point jumpshot"
                 sleep 1
                 posession=1
                 loopVar=$((loopVar-5))
@@ -211,7 +211,7 @@ while [ "$loopVar" -gt 0 ]; do
         elif [ $computerShotChoice -eq 4 ]; then
             echo "Three pointer chosen"
             sleep 1
-            yourRandomVal=$(shuf -i 1-4 -n 1)
+            yourRandomVal=$(shuf -i 1-7 -n 1)
             if [ $yourRandomVal -eq 1 ]; then
                 echo "You blocked the computer's three point jump shot"
                 sleep 1
